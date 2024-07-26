@@ -5,6 +5,12 @@ Este projeto aborda a implementação e avaliação de uma simulação de aprend
 
 ---
 
+## Desenvolvedores
+- Nickolas Carlos Carvalho Silva ([nickolascarlos](<https://github.com/nickolascarlos>))
+- Pedro Augusto Serafim Belo ([PedroASB](<https://github.com/PedroASB>))
+
+---
+
 ## Dataset
 
 Para este projeto, foi escolhida a base de dados MNIST, amplamente utilizada na avaliação de modelos de aprendizado de máquina. Esta base é composta por 70.000 imagens em escala de cinza, com dimensões de 28x28 pixels, de dígitos manuscritos. As imagens são divididas em 60.000 para treinamento e 10.000 para teste.
