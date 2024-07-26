@@ -11,6 +11,33 @@ Para este projeto, foi escolhida a base de dados MNIST, amplamente utilizada na 
 
 ---
 
+## Modelo de Rede Neural
+
+O modelo de rede neural `ModelMLP` define uma rede neural perceptron multicamadas (MLP) utilizando a biblioteca TensorFlow/Keras. A função estática `create_model` cria e retorna uma instância do modelo sequencial, composta por duas camadas densas. A primeira camada densa possui 128 neurônios com a função de ativação ReLU e uma forma de entrada de 784, ideal para dados de entrada como imagens de 28x28 pixels. A segunda camada é uma camada densa com 10 neurônios e utiliza a função de ativação softmax, adequada para problemas de classificação com 10 classes. O modelo é compilado com o otimizador Adam e usa a função de perda de entropia cruzada esparsa categórica, além de ser configurado para monitorar a métrica de precisão durante o treinamento.
+
+```python
+# Modelo de Rede Neural
+class ModelMLP:
+    @staticmethod
+    def create_model():
+        model = tf.keras.models.Sequential(
+            [
+                tf.keras.layers.Dense(units=128, activation='relu', input_shape=(784,)),
+                tf.keras.layers.Dense(10, activation="softmax")
+            ]
+        )
+        model.compile(
+            optimizer=tf.keras.optimizers.Adam(),
+            loss=tf.keras.losses.SparseCategoricalCrossentropy(),
+            metrics=['accuracy']
+        )
+        return model
+```
+
+
+
+---
+
 ## Modelo de Rede Sem Fio
 
 A classe `NetworkModel` é projetada para simular um ambiente de aprendizado federado considerando diversos parâmetros e condições de rede. Entre os parâmetros pré-definidos estão a potência do usuário (`user_P`), a largura de banda do usuário (`user_Bw`), a potência da estação base (`bs_P`), e o ruído térmico (`N`). Estes parâmetros são fixos para todos os usuários, garantindo que a única variável que influencie a comunicação seja a distância entre os dispositivos e a estação base. A classe também define a quantidade de usuários (`usernumber`), o número de Resource Blocks (RBs) (`RBnumber`), e o número total de parâmetros do modelo (`total_model_params`).
@@ -69,31 +96,6 @@ def calculate_final_total_energy(self, selected_clients, sender_clients, rb_allo
 ```
 
 O cálculo da energia total é realizado somando a energia de treinamento e a energia de upload para cada cliente selecionado. Para cada cliente, é identificado qual recurso de banda (RB) está alocado para ele. Se o cliente está na lista de clientes que enviam dados (`sender_clients`), a energia de upload específica para esse cliente e RB é somada à energia de treinamento. Caso contrário, apenas a energia de treinamento é considerada. Esse processo é repetido para todos os clientes selecionados, e a soma dessas energias é acumulada na variável `final_total_energy`, que é então retornada como o resultado final em joules.
-
----
-
-## Modelo de Rede Neural
-
-```python
-# Modelo de Rede Neural
-class ModelMLP:
-    @staticmethod
-    def create_model():
-        model = tf.keras.models.Sequential(
-            [
-                tf.keras.layers.Dense(units=128, activation='relu', input_shape=(784,)),
-                tf.keras.layers.Dense(10, activation="softmax")
-            ]
-        )
-        model.compile(
-            optimizer=tf.keras.optimizers.Adam(),
-            loss=tf.keras.losses.SparseCategoricalCrossentropy(),
-            metrics=['accuracy']
-        )
-        return model
-```
-
-O modelo de rede neural `ModelMLP` define uma rede neural perceptron multicamadas (MLP) utilizando a biblioteca TensorFlow/Keras. A função estática `create_model` cria e retorna uma instância do modelo sequencial, composta por duas camadas densas. A primeira camada densa possui 128 neurônios com a função de ativação ReLU e uma forma de entrada de 784, ideal para dados de entrada como imagens de 28x28 pixels. A segunda camada é uma camada densa com 10 neurônios e utiliza a função de ativação softmax, adequada para problemas de classificação com 10 classes. O modelo é compilado com o otimizador Adam e usa a função de perda de entropia cruzada esparsa categórica, além de ser configurado para monitorar a métrica de precisão durante o treinamento.
 
 ---
 
