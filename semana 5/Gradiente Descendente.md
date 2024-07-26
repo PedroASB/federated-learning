@@ -1,7 +1,6 @@
 # Gradiente Descendente
 
 > **Tópicos Avançados em Redes Sem Fio — 06 de junho de 2024**
-> 
 
 ---
 
@@ -22,7 +21,7 @@ $$
 Matematicamente, o gradiente da função é o vetor formado por suas derivadas parciais:
 
 $$
-∇f(x_1, x_2, \mathellipsis, x_n) = \bigg (\dfrac{∂f}{∂x_1},\ \dfrac{∂f}{∂x_2}, \mathellipsis, \dfrac{∂f}{∂x_n} \bigg )
+∇f(x_1, x_2, \dots, x_n) = \bigg (\dfrac{∂f}{∂x_1},\ \dfrac{∂f}{∂x_2}, \dots, \dfrac{∂f}{∂x_n} \bigg )
 $$
 
 $$
@@ -54,29 +53,35 @@ Dada uma função $f(x,y)$
 1. **Inicialização**: Define-se um ponto inicial $(x_0, y_0)$ e uma taxa de aprendizado $\alpha$, que controla o tamanho dos passos
 2. **Cálculo do Gradiente**: Calcula-se o gradiente da função no ponto atual
     
-    $$
-    \nabla f(x,y) = \bigg (\dfrac{∂f}{∂x},\ \dfrac{∂f}{∂y} \bigg )
-    $$
-    
-    $$
-    grad\_x \leftarrow \dfrac{∂f}{∂x}
-    \\
-    grad\_y \leftarrow \dfrac{∂f}{∂y}
-    $$
+$$
+\nabla f(x,y) = \bigg (\dfrac{∂f}{∂x},\ \dfrac{∂f}{∂y} \bigg )
+$$
+
+$$
+grad\_x \leftarrow \dfrac{∂f}{∂x}
+$$
+
+$$
+grad\_y \leftarrow \dfrac{∂f}{∂y}
+$$
     
 3. **Atualização dos Parâmetros**: Ajusta-se os valores dos parâmetros, movendo-os na direção oposta ao gradiente
     
-    $$
-    x_{i + 1} = x_i - \alpha \cdot \dfrac{∂f}{∂x_i}
-    \\
-    y_{i + 1} = y_i - \alpha \cdot \dfrac{∂f}{∂y_i}
-    $$
-    
-    $$
-    x \leftarrow x - \alpha \cdot grad\_x
-    \\
-    y \leftarrow y - \alpha \cdot grad\_y
-    $$
+$$
+x_{i + 1} = x_i - \alpha \cdot \dfrac{∂f}{∂x_i}
+$$
+
+$$
+y_{i + 1} = y_i - \alpha \cdot \dfrac{∂f}{∂y_i}
+$$
+
+$$
+x \leftarrow x - \alpha \cdot grad\_x
+$$
+
+$$
+y \leftarrow y - \alpha \cdot grad\_y
+$$
     
 4. **Repetição**: Repete-se os passos $2$ e $3$ até a função convergir para um mínimo ou atingir o número máximo de iterações
 
