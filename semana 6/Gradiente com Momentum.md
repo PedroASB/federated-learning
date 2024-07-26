@@ -64,8 +64,7 @@ Isso ajuda a suavizar as atualizações, reduzindo a oscilação e acelerando a 
 
 $$
 \large
- v_{t+1} = \beta \cdot v_{t} + (1 - \beta) \cdot \nabla f(w_{t})
-
+v_{t+1} = \beta \cdot v_{t} + (1 - \beta) \cdot \nabla f(w_{t})
 $$
 
 $$
