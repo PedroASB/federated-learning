@@ -1,11 +1,17 @@
-# Federated Learning
-## Dataset
+# Aprendizado Federado
+## Introdução
 
-Para este trabalho, foi escolhida a base de dados MNIST, amplamente utilizada na avaliação de modelos de aprendizado de máquina. Esta base é composta por 70.000 imagens em escala de cinza, com dimensões de 28x28 pixels, de dígitos manuscritos. As imagens são divididas em 60.000 para treinamento e 10.000 para teste.
+Este projeto aborda a implementação e avaliação de uma simulação de aprendizado federado, utilizando a base de dados MNIST. O objetivo é explorar diferentes estratégias de transmissão de parâmetros de modelos treinados localmente pelos clientes, otimizando a comunicação e os recursos computacionais no ambiente federado. As variantes de transmissão incluem uma abordagem de transmissão total, uma transmissão condicional baseada na diferença dos pesos, e uma transmissão aleatória. O projeto também incorpora a simulação de um ambiente de rede com parâmetros fixos e variáveis para avaliar a eficiência da comunicação e o consumo de energia. A implementação detalhada inclui classes para a modelagem da rede, do cliente e do servidor, além de funções específicas para seleção de clientes, alocação de canais de uplink, e agregação de modelos. A execução do sistema envolve a coordenação de múltiplas rodadas de treinamento federado, análise do desempenho do modelo global, e monitoramento de métricas de acurácia, perda, e consumo de energia, culminando na visualização gráfica dos resultados obtidos.
 
 ---
 
-## Modelo de Rede
+## Dataset
+
+Para este projeto, foi escolhida a base de dados MNIST, amplamente utilizada na avaliação de modelos de aprendizado de máquina. Esta base é composta por 70.000 imagens em escala de cinza, com dimensões de 28x28 pixels, de dígitos manuscritos. As imagens são divididas em 60.000 para treinamento e 10.000 para teste.
+
+---
+
+## Modelo de Rede Sem Fio
 
 A classe `NetworkModel` é projetada para simular um ambiente de aprendizado federado considerando diversos parâmetros e condições de rede. Entre os parâmetros pré-definidos estão a potência do usuário (`user_P`), a largura de banda do usuário (`user_Bw`), a potência da estação base (`bs_P`), e o ruído térmico (`N`). Estes parâmetros são fixos para todos os usuários, garantindo que a única variável que influencie a comunicação seja a distância entre os dispositivos e a estação base. A classe também define a quantidade de usuários (`usernumber`), o número de Resource Blocks (RBs) (`RBnumber`), e o número total de parâmetros do modelo (`total_model_params`).
 
@@ -62,7 +68,7 @@ def calculate_final_total_energy(self, selected_clients, sender_clients, rb_allo
     return final_total_energy
 ```
 
-O cálculo da energia total é realizado somando a energia de treinamento e a energia de upload para cada cliente selecionado. Para cada cliente, é identificado qual recurso de banda (RB) está alocado para ele. Se o cliente está na lista de clientes que enviam dados (sender_clients), a energia de upload específica para esse cliente e RB é somada à energia de treinamento. Caso contrário, apenas a energia de treinamento é considerada. Esse processo é repetido para todos os clientes selecionados, e a soma dessas energias é acumulada na variável final_total_energy, que é então retornada como o resultado final em joules.
+O cálculo da energia total é realizado somando a energia de treinamento e a energia de upload para cada cliente selecionado. Para cada cliente, é identificado qual recurso de banda (RB) está alocado para ele. Se o cliente está na lista de clientes que enviam dados (`sender_clients`), a energia de upload específica para esse cliente e RB é somada à energia de treinamento. Caso contrário, apenas a energia de treinamento é considerada. Esse processo é repetido para todos os clientes selecionados, e a soma dessas energias é acumulada na variável `final_total_energy`, que é então retornada como o resultado final em joules.
 
 ---
 
@@ -95,7 +101,75 @@ O modelo de rede neural `ModelMLP` define uma rede neural perceptron multicamada
 
 ### Classe do cliente
 
-A classe `Client` representa um cliente individual no ambiente de aprendizado federado. Cada cliente possui um modelo MLP local que é treinado usando um subconjunto dos dados MNIST específico para aquele cliente. A classe `Client` gerencia o carregamento dos dados de treinamento e teste, bem como a inicialização e configuração do modelo. Durante o treinamento, o cliente realiza a otimização do modelo localmente e decide se deve enviar os pesos atualizados ao servidor central. Esta decisão é baseada na diferença entre os pesos atuais e os pesos anteriores, permitindo uma transmissão condicional eficiente que reduz a comunicação desnecessária. Além disso, a classe `Client` implementa métodos para avaliar o desempenho do modelo localmente, proporcionando métricas de acurácia e perda que ajudam a monitorar o progresso do treinamento e a qualidade do modelo ao longo das rodadas de aprendizado federado.
+A classe `Client` representa um cliente individual no ambiente de aprendizado federado. Cada cliente possui um modelo MLP local que é treinado usando um subconjunto dos dados MNIST específico para aquele cliente. A classe `Client` gerencia o carregamento dos dados de treinamento e teste, bem como a inicialização e configuração do modelo. Além disso, a classe `Client` implementa métodos para realizar o treinamento local dos dispositivos e então transmitir os novos parâmetros para o servidor, e também para avaliar o desempenho do modelo localmente, proporcionando métricas de acurácia e perda que ajudam a monitorar o progresso do treinamento e a qualidade do modelo ao longo das rodadas de aprendizado federado.
+
+Existem três variantes de classes `Client`, em que uma sempre realiza a transmissão de seus parâmetros em uma rodada de treinamento, outra em que há uma condição imposta para tal transmissão seja feita, e uma última em que em a decisão sobre a transmissão é feita de forma aleatória. Essas variantes foram implementadas em `MLP Transmissão Total.ipynb`, `MLP  Transmissão Condicional.ipynb` e `MLP Transmissão Aleatória.ipynb`, respectivamente.
+
+**Transmissão total:**
+Esta é a versão básica do modelo de aprendizado federado, em que o cliente sempre transmite seus parâmetros atualizados após cada rodada de treinamento. A função `fit` carrega os pesos recebidos, treina o modelo localmente e, em seguida, envia os novos pesos ao servidor central. Esta abordagem faz com que o modelo global seja atualizado com as contribuições de todos os clientes em cada rodada.
+
+```python
+def fit(self, parameters, config=None):
+	self.model.set_weights(parameters)
+	history = self.model.fit(self.x_train, self.y_train, epochs=5, batch_size=128, validation_data=(self.x_test, self.y_test), verbose=False)
+	sample_size = len(self.x_train)
+	print(f"Acurácia: {history.history['val_accuracy'][-1]} | ")
+	return self.model.get_weights(), sample_size, {"val_accuracy": history.history['val_accuracy'][-1], 
+	                                               "val_loss": history.history['val_loss'][-1]}
+```
+
+**Transmissão condicional:**
+Nesta variante proposta, a transmissão dos parâmetros é realizada apenas se a diferença entre os pesos atuais e os pesos anteriores for significativa. Após o treinamento, a função `fit` calcula a diferença percentual média entre os pesos novos e antigos. Se essa diferença for menor que um limiar definido (`EPSILON_DELTA`), o cliente decide não transmitir seus pesos, economizando largura de banda e recursos computacionais. Esta abordagem é útil para reduzir a comunicação desnecessária, especialmente quando as atualizações de peso são mínimas.
+
+```python
+def fit(self, parameters, config=None):
+	self.model.set_weights(parameters)
+	history = self.model.fit(self.x_train, self.y_train, epochs=5, batch_size=128,
+	                         validation_data=(self.x_test, self.y_test), verbose=False)
+	self.current_weights = self.model.get_weights()
+	sample_size = len(self.x_train)
+	print(f"Acurácia: {history.history['val_accuracy'][-1]} | ", end='')
+	if self.old_weights is not None:
+	    weight_diff = np.mean([
+	        np.mean(np.abs((w1 - w2) / w2) * 100) 
+	        for w1, w2 in zip(self.current_weights, self.old_weights)
+	        if np.sum(np.abs(w2)) > 0  # Evitar divisão por zero
+	    ])
+	    print(f"Diferença dos pesos: {weight_diff}")
+	    self.old_weights = self.current_weights
+	    if weight_diff < EPSILON_DELTA:
+	        print("weight_diff < EPSILON_DELTA. O modelo não será transmitido.")
+	        return None
+	    else:
+	        print("ENVIADO!")
+	        return self.current_weights, sample_size, {"val_accuracy": history.history['val_accuracy'][-1],
+	                                                       "val_loss": history.history['val_loss'][-1]}
+	else:
+	    print("ENVIANDO PRIMEIRA")
+	    self.old_weights = self.current_weights
+	    return self.current_weights, sample_size, {"val_accuracy": history.history['val_accuracy'][-1],
+	                                                       "val_loss": history.history['val_loss'][-1]}
+```
+
+**Transmissão aleatória:**
+Nesta versão, a decisão de transmitir os parâmetros é feita de forma aleatória. Após o treinamento, a função `fit` determina aleatoriamente, com base em um valor de probabilidade (`LAMBDA`), se os pesos serão enviados ao servidor. Esta abordagem tem como finalidade ajudar a verificar o custo-benefício do modelo de transmissão condicional. A título de exemplo, suponha que em uma transmissão condicional houveram 700 transmissões de um máximo de 1000, ou seja, 70% do máximo. Neste caso, testa-se uma transmissão aleatória em que os modelos locais atualizados serão transmitidos aproximadamente 70% das vezes, utilizando um critério simples de decisão (probabilidade), sem gastos com cálculos de diferença de pesos. Dessa forma, se forem obtidos resultados similares com uma transmissão aleatória, isso indicaria um mal custo-benefício do modelo com transmissão condicional; caso contrário, isso seria uma evidência da efetividade de se realizar o cálculo da diferença de pesos como critério de decisão.
+
+```python
+def fit(self, parameters, config=None):
+	self.model.set_weights(parameters)
+	history = self.model.fit(self.x_train, self.y_train, epochs=5, batch_size=128, validation_data=(self.x_test, self.y_test), verbose=False)
+	sample_size = len(self.x_train)
+	print(f"Acurácia: {history.history['val_accuracy'][-1]} | ", end='')
+	
+	if random.random() > LAMBDA and self.old_weights is not None:
+	    print("Modelo NÃO transmitido!")
+	    return None
+	
+	print('Modelo transmitido!')
+	self.old_weights = self.model.get_weights()
+	return self.model.get_weights(), sample_size, {"val_accuracy": history.history['val_accuracy'][-1], 
+	                                               "val_loss": history.history['val_loss'][-1]}
+```
 
 ### Classe do servidor
 
@@ -105,11 +179,43 @@ Inicialmente, o servidor carrega os conjuntos de dados de treino e teste do MNIS
 
 No método `fit`, o servidor coordena o processo de treinamento federado selecionando os clientes e inicia o ajuste do modelo global (`w_global`). Cada cliente selecionado executa um processo de treinamento local em seu próprio conjunto de dados, resultando em um modelo atualizado e, em seguida, decide se envia ou não o modelo resultante de volta ao servidor. Se um novo modelo for enviado, o servidor o armazena e o utiliza na atualização do modelo global. Caso o cliente tenha optado por não realizar o envio do seu novo modelo, treinado durante a rodada corrente, ele retorna None para o servidor que, então, usará o último modelo enviado pelo cliente para realizar a atualização do modelo global.
 
+```python
+def fit(self):
+	weight_list, sample_sizes_list, info_list, sender_clients = [], [], [], []
+	for i, pos in enumerate(self.selected_clients):
+	    print(f"Cliente #{pos+1} | ", end='')
+	
+	    # Se o cliente decidir não enviar o modelo, ele retorna um None
+	    new_model = self.clients_model_list[pos].fit(parameters=self.w_global)
+	
+	    weights, size, info = new_model if new_model is not None else self.get_client_previous_model(pos)
+	    weight_list.append(weights)
+	    sample_sizes_list.append(size)
+	    info_list.append(info)
+	
+	    # Se o cliente enviou um novo modelo, salve-o e insira-o ao sender_client
+	    if new_model is not None:
+	        self.save_client_previous_model(pos, (weights, size, info_list))
+	        sender_clients.append(pos)
+	
+	return weight_list, sample_sizes_list, {"acc_loss_local":[(pos+1, info_list[i]) for i, pos in enumerate(self.selected_clients)]}, sender_clients
+```
+
 A função `aggregate_fit` é onde a lógica de agregação dos modelos locais dos clientes é efetivamente implementada. Ela calcula uma média ponderada dos pesos dos modelos recebidos, onde o peso de cada modelo é determinado pelo tamanho do conjunto de dados do respectivo cliente, de maneira que clientes com conjuntos de dados maiores contribuam mais significativamente para a atualização do modelo global a cada rodada.
+
+```python
+def aggregate_fit(self, weight_list, sample_sizes):
+	self.w_global = []
+	for weights in zip(*weight_list):
+	    weighted_sum = 0
+	    total_samples = sum(sample_sizes)
+	    for i in range(len(weights)):
+	        weighted_sum += weights[i] * sample_sizes[i]
+	    self.w_global.append(weighted_sum / total_samples)
+```
 
 Após cada rodada de treinamento, o servidor avalia o desempenho do modelo global para monitoramento e análise, empregando, para tanto, o método `centralized_evaluation`, que calculará métricas de desempenho, como perda média e precisão, utilizando o conjunto de teste centralizado.
 
 ### Execução
 
 A função `executar` é responsável por coordenar e gerenciar o processo de treinamento federado ao longo de várias rodadas. Ela inicia configurando o ambiente e os parâmetros necessários, incluindo a criação de clientes e a inicialização do servidor central. Em seguida, a função entra em um loop que se repete pelo número definido de rodadas. Em cada rodada, a função seleciona um subconjunto de clientes para treinar seus modelos localmente e, dependendo da diferença nos pesos, envia os modelos atualizados de volta ao servidor. O servidor, então, agrega os modelos recebidos para atualizar o modelo global. Após cada rodada, a função `executar` avalia o modelo global tanto de forma distribuída quanto centralizada, coletando métricas de desempenho como acurácia e perda. Além disso, a função registra informações detalhadas sobre as transmissões e o consumo de energia, permitindo uma análise abrangente da eficiência do processo de aprendizado federado. Ao final de todas as rodadas, são gerados gráficos que visualizam o desempenho do modelo ao longo do tempo, proporcionando insights valiosos sobre o comportamento e a eficácia da abordagem de aprendizado federado implementada.
-
