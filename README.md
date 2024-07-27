@@ -227,3 +227,31 @@ Após cada rodada de treinamento, o servidor avalia o desempenho do modelo globa
 ### Execução
 
 A função `executar` é responsável por coordenar e gerenciar o processo de treinamento federado ao longo de várias rodadas. Ela inicia configurando o ambiente e os parâmetros necessários, incluindo a criação de clientes e a inicialização do servidor central. Em seguida, a função entra em um loop que se repete pelo número definido de rodadas. Em cada rodada, a função seleciona um subconjunto de clientes para treinar seus modelos localmente e, dependendo da diferença nos pesos, envia os modelos atualizados de volta ao servidor. O servidor, então, agrega os modelos recebidos para atualizar o modelo global. Após cada rodada, a função `executar` avalia o modelo global tanto de forma distribuída quanto centralizada, coletando métricas de desempenho como acurácia e perda. Além disso, a função registra informações detalhadas sobre as transmissões e o consumo de energia, permitindo uma análise abrangente da eficiência do processo de aprendizado federado. Ao final de todas as rodadas, são gerados gráficos que visualizam o desempenho do modelo ao longo do tempo, proporcionando insights valiosos sobre o comportamento e a eficácia da abordagem de aprendizado federado implementada.
+
+## Resultados
+
+### Transmissão Total
+
+<p float="left">
+    <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="200" />
+    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="205" /> 
+    <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="195" />
+</p>
+
+
+### Transmissão Condicional
+
+<p float="left">
+    <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="200" />
+    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="205" /> 
+    <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="195" />
+</p>
+
+
+### Transmissão Aleatória
+
+<p float="left">
+    <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="200" />
+    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="205" /> 
+    <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="195" />
+</p>
