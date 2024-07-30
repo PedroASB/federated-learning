@@ -233,25 +233,61 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
 ### Transmissão Total
 
 <p float="left">
-    <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="200" />
-    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="205" /> 
-    <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="195" />
+    <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="300" />
+    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="310" /> 
+    <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="295" />
 </p>
 
+---
 
-### Transmissão Condicional
+### Transmissão Condicional ($\varepsilon = 25$)
 
 <p float="left">
-    <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="200" />
-    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="205" /> 
-    <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="195" />
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_25\acuracia_transmissao_condicional.jpg" width="300" />
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_25\energia_transmissao_condicional.jpg" width="310" /> 
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_25\energia_acumulada_transmissao_condicional.jpg" width="290" />
 </p>
 
-
-### Transmissão Aleatória
+### Transmissão Condicional ($\varepsilon = 40$)
 
 <p float="left">
-    <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="200" />
-    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="205" /> 
-    <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="195" />
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_40\acuracia_transmissao_condicional.jpg" width="300" />
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_40\energia_transmissao_condicional.jpg" width="310" /> 
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_40\energia_acumulada_transmissao_condicional.jpg" width="290" />
 </p>
+
+
+### Transmissão Condicional ($\varepsilon = 55$)
+
+<p float="left">
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_55\acuracia_transmissao_condicional.jpg" width="300" />
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_55\energia_transmissao_condicional.jpg" width="310" /> 
+    <img src="semana 9\graficos\transmissao_condicional\epsilon_55\energia_acumulada_transmissao_condicional.jpg" width="290" />
+</p>
+
+---
+
+### Transmissão Aleatória ($\approx 300$ transmissões)
+
+<p float="left">
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_25\acuracia_transmissao_aleatoria.jpg" width="300" />
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_25\energia_transmissao_aleatoria.jpg" width="310" /> 
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_25\energia_acumulada_transmissao_aleatoria.jpg" width="295" />
+</p>
+
+### Transmissão Aleatória ($\approx 400$ transmissões)
+
+<p float="left">
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_40\acuracia_transmissao_aleatoria.jpg" width="300" />
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_40\energia_transmissao_aleatoria.jpg" width="310" /> 
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_40\energia_acumulada_transmissao_aleatoria.jpg" width="295" />
+</p>
+
+### Transmissão Aleatória ($\approx 250$ transmissões)
+
+<p float="left">
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_55\acuracia_transmissao_aleatoria.jpg" width="300" />
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_55\energia_transmissao_aleatoria.jpg" width="310" /> 
+    <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_55\energia_acumulada_transmissao_aleatoria.jpg" width="295" />
+</p>
+
