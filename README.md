@@ -240,7 +240,7 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
 
 ---
 
-### Transmissão Condicional ($\varepsilon = 25$)
+### Transmissão Condicional (ε = 25)
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_condicional\epsilon_25\acuracia_transmissao_condicional.jpg" width="300" />
@@ -248,7 +248,7 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
     <img src="semana 9\graficos\transmissao_condicional\epsilon_25\energia_acumulada_transmissao_condicional.jpg" width="290" />
 </p>
 
-### Transmissão Condicional ($\varepsilon = 40$)
+### Transmissão Condicional (ε = 40)
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_condicional\epsilon_40\acuracia_transmissao_condicional.jpg" width="300" />
@@ -257,7 +257,7 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
 </p>
 
 
-### Transmissão Condicional ($\varepsilon = 55$)
+### Transmissão Condicional (ε = 55)
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_condicional\epsilon_55\acuracia_transmissao_condicional.jpg" width="300" />
@@ -267,7 +267,7 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
 
 ---
 
-### Transmissão Aleatória ($\approx 300$ transmissões)
+### Transmissão Aleatória (≈ 300 transmissões)
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_25\acuracia_transmissao_aleatoria.jpg" width="300" />
@@ -275,7 +275,7 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_25\energia_acumulada_transmissao_aleatoria.jpg" width="295" />
 </p>
 
-### Transmissão Aleatória ($\approx 400$ transmissões)
+### Transmissão Aleatória (≈ 400 transmissões)
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_40\acuracia_transmissao_aleatoria.jpg" width="300" />
@@ -283,7 +283,7 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_40\energia_acumulada_transmissao_aleatoria.jpg" width="295" />
 </p>
 
-### Transmissão Aleatória ($\approx 250$ transmissões)
+### Transmissão Aleatória (≈ 250 transmissões)
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_55\acuracia_transmissao_aleatoria.jpg" width="300" />
