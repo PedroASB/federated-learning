@@ -121,50 +121,53 @@ O cálculo da energia total é realizado somando a energia de treinamento e a en
 ### Equações utilizadas no modelo de comunicação
 
 Considere a técnica de acesso múltiplo por divisão de frequência ortogonal (OFDMA) para o uplink, onde cada dispositivo ocupa um Resource Block (RB). A taxa de uplink do dispositivo $i$ transmitindo os parâmetros do modelo $w_i$ para a Base Station (BS) pode ser formulada como:
+
 $$
-\large
+\Large
 c_i^U (r_i,P_i) = \sum_{n=1}^R r_{i,n} B^U_n \mathbb E \bigg( \log_2 \bigg(1 + \dfrac{P_i h_i}{I_n + B_n^U N_0} \bigg) \bigg)
 $$
 
 Onde $r_i = [r_{i,1}, \dots, r_{i,R}]$ é o vetor de alocação de RBs, $r_{i,n} \in \{0, 1\}$ e $\sum_{n=1}^R r_{i,n} = 1$, com $r_{i,n} = 1$ indicando que o RB $n$ está alocado para o dispositivo $i$. O ganho do canal é dado por $h_i = o_i d_i^{−\alpha}$ , onde $d_i$ é a distância entre o dispositivo $i$ e a BS, $o_i$ é o parâmetro de desvanecimento de Rayleigh e $\alpha$ é um expoente que afeta como o ganho do canal varia com a distância.
 
 A taxa de dados de downlink alcançada pela BS ao transmitir os parâmetros do modelo global é dada por:
+
 $$
-\large
+\Large
 c_i^D (r_i,P_i) = B^D \mathbb E \bigg( \log_2 \Bigg(1 + \dfrac{P_B h_i}{I^D + B^D N_0} \bigg) \bigg)
 $$
 
 Assume-se que os modelos de FL são transmitidos por meio de um único pacote. Assim, o atraso de transmissão entre um dispositivo $i$ e a BS no uplink e downlink podem ser respectivamente formulados como:
+
 $$
-\large
+\Large
 l_i^U (r_i,P_i) = \dfrac{S^U_{pkt}}{c_i^U(r_i,P_i)}
 $$
 
 $$
-\large
+\Large
 l_i^D = \dfrac{S^D_{pkt}}{c_i^D}
 $$
 
 Onde $S^U_{pkt}$ é o tamanho do pacote de uplink e S^D_{pkt} é o tamanho do pacote de downlink.
 
-
 A demanda energética da BS não é considerada, uma vez que esta normalmente possui um fornecimento contínuo de energia. O modelo de consumo de energia dos dispositivos para o treinamento e transmissão do modelo $w_i$ podem ser formulados como:
 
 $$
-\large
-e_i^T = \zeta \omega_i \thetasym^2 Z(w_i)
+\Large
+e_i^T = \zeta \omega_i \vartheta^2 Z(w_i)
 $$
 
 $$
-\large
+\Large
 e_i^U = P_i l_i^U
 $$
 
-Onde $\thetasym$, $\omega_i$ e $\zeta$ referem-se, respectivamente, à frequência do clock, ao número de ciclos da unidade central de processamento e ao coeficiente de consumo de energia de cada dispositivo.
+Onde $\vartheta$, $\omega_i$ e $\zeta$ referem-se, respectivamente, à frequência do clock, ao número de ciclos da unidade central de processamento e ao coeficiente de consumo de energia de cada dispositivo.
+
 Dessa forma, em uma rodada de comunicação, a computação da energia consumida pelo dispositivo $i$ é dada por:
 
 $$
-\large
+\Large
 e_i^R = e_i^T + e_i^U
 $$
 
