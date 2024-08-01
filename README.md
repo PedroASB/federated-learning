@@ -266,7 +266,7 @@ A classe `Server` implementa um sistema de aprendizado federado, uma abordagem d
 
 Inicialmente, o servidor carrega os conjuntos de dados de treino e teste do MNIST,  bem como os modelos de cada cliente participante do sistema, que são armazenados na lista `clients_model_list`.
 
-No método `fit`, o servidor coordena o processo de treinamento federado selecionando os clientes e inicia o ajuste do modelo global (`w_global`). Cada cliente selecionado executa um processo de treinamento local em seu próprio conjunto de dados, resultando em um modelo atualizado e, em seguida, decide se envia ou não o modelo resultante de volta ao servidor. Se um novo modelo for enviado, o servidor o armazena e o utiliza na atualização do modelo global. Caso o cliente tenha optado por não realizar o envio do seu novo modelo, treinado durante a rodada corrente, ele retorna None para o servidor que, então, usará o último modelo enviado pelo cliente para realizar a atualização do modelo global.
+No método `fit`, o servidor coordena o processo de treinamento federado e inicia o ajuste do modelo global (`w_global`). Cada cliente selecionado executa um processo de treinamento local em seu próprio conjunto de dados, resultando em um modelo atualizado e, em seguida, decide se envia ou não o modelo resultante de volta ao servidor. Se um novo modelo for enviado, o servidor o armazena e o utiliza na atualização do modelo global. Caso o cliente tenha optado por não realizar o envio do seu novo modelo, treinado durante a rodada corrente, ele retorna None para o servidor que, então, usará o último modelo enviado pelo cliente para realizar a atualização do modelo global.
 
 ```python
 def fit(self):
