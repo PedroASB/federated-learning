@@ -11,6 +11,21 @@ Este projeto aborda a implementação e avaliação de uma simulação de aprend
 
 ---
 
+## Objetivos
+
+**Objetivo Geral (_OG_):** Considerando um algoritmo de aprendizado federado, o objetivo do projeto é definir estratégias para economizar recursos de rede sem comprometer significativamente o desempenho do treinamento do modelo global, trazendo um bom custo-benefício para o algoritmo.
+
+**Objetivos Específicos:**
+
+- _**OE-1**_: Implementar e comparar diferentes estratégias de transmissão de parâmetros durante o uplink em um algoritmo de aprendizado federado: transmissão total, condicional e aleatória.
+- _**OE-2**_: Analisar a influência da diferença de pesos e de gradientes para a decisão de transmissão de parâmetros durante o uplink.
+- _**OE-3**_: Avaliar a eficácia dessas estratégias em cenários simulados utilizando a base de dados MNIST.
+- _**OE-4**_: Avaliar o impacto das diferentes estratégias de transmissão na precisão e na taxa de convergência do modelo global.
+- _**OE-5**_: Analisar o custo energético associado a cada estratégia de transmissão e seleção de clientes.
+
+
+---
+
 ## Dataset
 
 Para este projeto, foi escolhida a base de dados MNIST, amplamente utilizada na avaliação de modelos de aprendizado de máquina. Esta base é composta por 70.000 imagens em escala de cinza, com dimensões de 28x28 pixels, de dígitos manuscritos. As imagens são divididas em 60.000 para treinamento e 10.000 para teste.
