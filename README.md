@@ -122,6 +122,19 @@ O cálculo da energia total é realizado somando a energia de treinamento e a en
 
 ## Aprendizado Federado
 
+### Diferença de gradientes e de pesos
+Durante o estudo, buscou-se entender a influência da utilização da diferença de pesos e da diferença de gradientes para a decisão de transmissão de parâmetros durante a etapa de uplink. Revisões sobre os conceitos de gradientes descendentes e gradientes descendentes com momentum estão presentes nos diretórios `semana 5/` e `semana 6/`, respectivamente.
+
+Foi realizada uma análise comparativa entre as duas formas de decisão de transmissão, e observou-se que parâmetros são mais estáveis, como pode ser visto pelos gráficos a seguir. Diante disso, optou-se pela utilização da diferença de pesos, que é detalhada mais adiante na descrição da função `fit` da classe do cliente.
+
+<img src="semana 5\Imagens\param_diff.png" width="400" />
+
+
+<img src="semana 5\Imagens\grad_diff.png" width="400" />
+
+Essa análise foi feita com base nos resultados obtidos a partir do código implementado [neste link](<https://colab.research.google.com/drive/1l6T6Fo37jhC9l3TnjdYsdj1Mv7nvPZ11?usp=sharing>).
+
+
 ### Classe do cliente
 
 A classe `Client` representa um cliente individual no ambiente de aprendizado federado. Cada cliente possui um modelo MLP local que é treinado usando um subconjunto dos dados MNIST específico para aquele cliente. A classe `Client` gerencia o carregamento dos dados de treinamento e teste, bem como a inicialização e configuração do modelo. Além disso, a classe `Client` implementa métodos para realizar o treinamento local dos dispositivos e então transmitir os novos parâmetros para o servidor, e também para avaliar o desempenho do modelo localmente, proporcionando métricas de acurácia e perda que ajudam a monitorar o progresso do treinamento e a qualidade do modelo ao longo das rodadas de aprendizado federado.
