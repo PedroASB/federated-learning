@@ -245,15 +245,26 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
 
 ## Resultados
 
-### Transmissão Total
+### Gráficos da Transmissão Total
+
+O cliente sempre transmite seus parâmetros atualizados após cada rodada de treinamento, garantindo que o modelo global seja atualizado com as contribuições de todos os clientes. A seguir, estão os gráficos de acurácia por rodada, energia gasta por rodada e a energia gasta acumulada por rodada, respectivamente.
+
+
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_total\acuracia_transmissao_total.jpg" width="270" />
-    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="280" /> 
+    <img src="semana 9\graficos\transmissao_total\energia_transmissao_total.jpg" width="280" />
     <img src="semana 9\graficos\transmissao_total\energia_acumulada_transmissao_total.jpg" width="265" />
 </p>
 
+
 ---
+### Gráficos da Transmissão Condicional
+
+A transmissão dos parâmetros só ocorre se a diferença entre os pesos novos e antigos for significativa, economizando largura de banda e recursos computacionais quando as atualizações são mínimas. A seguir, estão os gráficos de acurácia por rodada, energia gasta por rodada e a energia gasta acumulada por rodada, respectivamente, para cada valor de ε testado.
+
+
+
 
 ### Transmissão Condicional (ε = 25)
 
@@ -281,8 +292,12 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
 </p>
 
 ---
+### Gráficos da Transmissão Aleatória
 
-### Transmissão Aleatória (≈ 300 transmissões)
+A decisão de transmitir os parâmetros é feita aleatoriamente, com base em uma probabilidade pré-definida, ajudando a avaliar o custo-benefício da transmissão condicional sem os cálculos de diferença de pesos. A seguir, estão os gráficos de acurácia por rodada, energia gasta por rodada e a energia gasta acumulada por rodada, respectivamente. Para cada ε testado com a transmissão condicional, foi gerado um teste com transmissão aleatória para análise do custo-benefício.
+
+### Transmissão Aleatória (≈ 400 transmissões)
+Simulando a quantidade de transmissões observada na transmissão condicional com ε = 25.
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_25\acuracia_transmissao_aleatoria.jpg" width="270" />
@@ -290,7 +305,8 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_25\energia_acumulada_transmissao_aleatoria.jpg" width="265" />
 </p>
 
-### Transmissão Aleatória (≈ 400 transmissões)
+### Transmissão Aleatória (≈ 300 transmissões)
+Simulando a quantidade de transmissões observada na transmissão condicional com ε = 40.
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_40\acuracia_transmissao_aleatoria.jpg" width="270" />
@@ -299,6 +315,7 @@ A função `executar` é responsável por coordenar e gerenciar o processo de tr
 </p>
 
 ### Transmissão Aleatória (≈ 250 transmissões)
+Simulando a quantidade de transmissões observada na transmissão condicional com ε = 55.
 
 <p float="left">
     <img src="semana 9\graficos\transmissao_aleatoria\validacao_epsilon_55\acuracia_transmissao_aleatoria.jpg" width="270" />
