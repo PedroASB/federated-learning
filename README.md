@@ -127,7 +127,7 @@ $$
 c_i^U (r_i,P_i) = \sum_{n=1}^R r_{i,n} B^U_n \mathbb E \bigg( \log_2 \bigg(1 + \dfrac{P_i h_i}{I_n + B_n^U N_0} \bigg) \bigg)
 $$
 
-Onde $r_i = [r_{i,1}, \dots, r_{i,R}]$ é o vetor de alocação de RBs, $r_{i,n} \in \{0, 1\}$ e $\sum_{n=1}^R r_{i,n} = 1$, com $r_{i,n} = 1$ indicando que o RB $n$ está alocado para o dispositivo $i$. O ganho do canal é dado por $h_i = o_i d_i^{−\alpha}$ , onde $d_i$ é a distância entre o dispositivo $i$ e a BS, $o_i$ é o parâmetro de desvanecimento de Rayleigh e $\alpha$ é um expoente que afeta como o ganho do canal varia com a distância.
+Onde $r_i = [r_{i,1}, \dots, r_{i,R}]$ é o vetor de alocação de RBs, $r_{i,n} \in \{0, 1\}$ e $\displaystyle \sum_{n=1}^R r_{i,n} = 1$, com $r_{i,n} = 1$ indicando que o RB $n$ está alocado para o dispositivo $i$. O ganho do canal é dado por $h_i = o_i d_i^{−\alpha}$ , onde $d_i$ é a distância entre o dispositivo $i$ e a BS, $o_i$ é o parâmetro de desvanecimento de Rayleigh e $\alpha$ é um expoente que afeta como o ganho do canal varia com a distância.
 
 A taxa de dados de downlink alcançada pela BS ao transmitir os parâmetros do modelo global é dada por:
 
@@ -148,7 +148,7 @@ $$
 l_i^D = \dfrac{S^D_{pkt}}{c_i^D}
 $$
 
-Onde $S^U_{pkt}$ é o tamanho do pacote de uplink e S^D_{pkt} é o tamanho do pacote de downlink.
+Onde $S^U_{pkt}$ é o tamanho do pacote de uplink e $S^D_{pkt}$ é o tamanho do pacote de downlink.
 
 A demanda energética da BS não é considerada, uma vez que esta normalmente possui um fornecimento contínuo de energia. O modelo de consumo de energia dos dispositivos para o treinamento e transmissão do modelo $w_i$ podem ser formulados como:
 
